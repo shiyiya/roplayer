@@ -1,0 +1,33 @@
+{
+  "name": "roplayer",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "homepage": "https://github.com/shiyiya/roplayer#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/shiyiya/roplayer.git"
+  },
+  "scripts": {
+    "lint": "prettier -w ./packages/*/**/*.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@radix-ui/react-slider": "^1.2.0",
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "framer-motion": "^11.3.24",
+    "prettier": "^3.3.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "printWidth": 120,
+    "tabWidth": 2
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "name": "roplayer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "zustand": "^4.5.4",
+    "react": "^18.3.1",
+    "@types/react": "^18.3.3",
+    "@radix-ui/themes": "latest",
+    "classnames": "latest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
