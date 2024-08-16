@@ -6,8 +6,32 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./src/app.css" />
     <script type="module" src="./src/app.tsx"></script>
+    <style>
+      .spinner {
+        width: 1em;
+        height: 1em;
+        border: 0.12em solid var(--color, white);
+        border-bottom-color: transparent;
+        border-radius: 50%;
+        display: inline-block;
+        box-sizing: border-box;
+        animation: spinner-rotation 0.8s linear infinite;
+      }
+
+      @keyframes spinner-rotation {
+        0% {
+          transform: rotate(0);
+        }
+
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
   </head>
   <body>
-    <div id="app" style="aspect-ratio: 19/6; width: 100%"></div>
+    <div id="app" style="aspect-ratio: 16/9; width: 100%"></div>
+
+    <a href="https://github.com/shiyiya/roplayer"> https://github.com/shiyiya/roplayer </a>
   </body>
 </html>

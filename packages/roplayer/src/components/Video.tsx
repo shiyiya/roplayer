@@ -50,7 +50,7 @@ export function Video(props: VideoProps) {
   }
 
   return (
-    <video ref={videoEl} {...props} className="w-full h-full">
+    <video ref={videoEl} {...props} className="absolute inset-0 w-full h-full bg-black">
       {props.children}
     </video>
   )

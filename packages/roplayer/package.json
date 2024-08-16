@@ -7,11 +7,12 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "zustand": "^4.5.4",
+    "zustand": "latest",
     "react": "^18.3.1",
     "@types/react": "^18.3.3",
     "@radix-ui/themes": "latest",
-    "classnames": "latest"
+    "classnames": "latest",
+    "immer": "latest"
   },
   "keywords": [],
   "author": "",
