@@ -3,28 +3,36 @@ import { exitFullscreen, requestFullscreenIfSupport } from '../helper/fullscreen
 import { useProgressStore } from './progress'
 
 type PlayerStore = {
+  $player: HTMLDivElement
+  $video: HTMLVideoElement
+
+  // MediaState
   isPlaying: boolean
   isPaused: boolean
   isLoading: boolean // buffering or not
   hasPlayedOnce: boolean // has the video played at all?
   volume: number
   playbackRate: number
+  showControls: boolean
+  isFullScreen: boolean
+
   addPlayerEventListener: (element: HTMLDivElement) => void
   addVideoEventListener: (videoElement: HTMLVideoElement) => void
+
+  // Controls
   play: () => void
   pause: () => void
-  showControls: boolean
-  seekTo: (time: number) => void
   togglePlay: () => void
-  isFullScreen: boolean
+  mute: () => void
+  unmute: () => void
+  setVolume: (val: number) => void
+  seek: (time: number) => void
   toggleFullScreen: () => void
-  $videoPlayer: HTMLDivElement | null
-  $videoElement: HTMLVideoElement | null
 }
 
 export const usePlayerStore = create<PlayerStore>()((set, get) => ({
-  $videoElement: null,
-  $videoPlayer: null,
+  $player: null as any,
+  $video: null as any,
   isPlaying: false,
   isPaused: true,
   isLoading: false,
@@ -37,7 +45,7 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
     if (get().isFullScreen) {
       exitFullscreen()
     } else {
-      requestFullscreenIfSupport(get().$videoPlayer!, get().$videoElement!)
+      requestFullscreenIfSupport(get().$player, get().$video!)
     }
 
     set((state) => ({
@@ -47,7 +55,7 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
   addPlayerEventListener: ($root) => {
     let timer: any
     set((state) => ({
-      $videoPlayer: $root,
+      $player: $root,
     }))
     $root.addEventListener('mouseenter', () => {
       if (get().isPlaying) {
@@ -70,7 +78,7 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
   },
   addVideoEventListener($video: HTMLVideoElement) {
     set((state) => ({
-      $videoElement: $video,
+      $video: $video,
     }))
 
     useProgressStore.getState().addEventListener($video)
@@ -134,24 +142,26 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
     }
   },
   play() {
-    get().$videoElement?.play()
+    get().$video.play()
     set((state) => ({
       isPlaying: true,
     }))
   },
   pause() {
-    get().$videoElement?.pause()
+    get().$video.pause()
     set((state) => ({
       isPlaying: false,
     }))
   },
-
-  seekTo(time: number) {
-    get().$videoElement!.currentTime = time
+  seek(time: number) {
+    get().$video.currentTime = time
     useProgressStore.setState((state) => {
       state.progress.draggingTime = -1
       state.progress.time = time
       return state
     })
   },
+  mute: () => {},
+  unmute: () => {},
+  setVolume: (val: number) => {},
 }))

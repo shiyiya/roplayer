@@ -3,7 +3,7 @@ import { useProgressStore } from '../atoms/progress'
 import { Slider } from '../components/ui/Slider'
 
 export const TimeSlider = () => {
-  const seekTo = usePlayerStore((s) => s.seekTo)
+  const seek = usePlayerStore((s) => s.seek)
 
   const {
     progress: { time = 0, duration = 0, draggingTime },
@@ -18,7 +18,7 @@ export const TimeSlider = () => {
       onPointerDown={() => setDraggingTime(time)}
       onValueChange={(value) => setDraggingTime(value[0])}
       onValueCommit={(value) => {
-        seekTo(value[0])
+        seek(value[0])
       }}
     />
   )
