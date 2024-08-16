@@ -1,11 +1,12 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
+import { parseTimeRanges } from '../helper/time'
 
 export interface ProgressState {
   progress: {
     time: number
     duration: number
-    buffered: number
+    buffered: { start: number; end: number }[]
     draggingTime: number
   }
   setDraggingTime(time: number): void
@@ -17,7 +18,7 @@ export const useProgressStore = create<ProgressState>()(
     progress: {
       time: 0,
       duration: 0,
-      buffered: 0,
+      buffered: [],
       draggingTime: -1,
     },
     setDraggingTime(time: number) {
@@ -38,7 +39,7 @@ export const useProgressStore = create<ProgressState>()(
       })
       $video.addEventListener('progress', () => {
         set((state) => {
-          state.progress.buffered = $video.buffered.end(0)
+          state.progress.buffered = parseTimeRanges($video.buffered)
         })
       })
     },
