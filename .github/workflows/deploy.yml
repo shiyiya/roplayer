@@ -23,7 +23,7 @@ jobs:
           pnpm i --registry https://registry.npmmirror.com
           cd examples/main
           pnpm run build
-          cp ./dist ../../
+          cp -r ./dist ../../
 
       - name: deploy to github pages
         uses: peaceiris/actions-gh-pages@v3
