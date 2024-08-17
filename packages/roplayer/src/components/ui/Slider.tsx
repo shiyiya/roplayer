@@ -13,7 +13,11 @@ export const Slider = (
   props: Pick<_Slider.SliderProps, 'max' | 'step' | 'value' | 'onValueCommit' | 'onPointerDown' | 'onValueChange'>
 ) => {
   return (
-    <_Slider.Root className="relative flex items-center select-none touch-none w-full h-[32px]" {...props}>
+    <_Slider.Root
+      // orientation="vertical"
+      className="relative flex items-center select-none touch-none w-full h-[32px]"
+      {...props}
+    >
       <_Slider.Track className="bg-blackA7 relative grow rounded-full h-[5px] bg-[#7f8d9b40] ">
         <_Slider.Range className="absolute bg-white rounded-full h-full" />
       </_Slider.Track>

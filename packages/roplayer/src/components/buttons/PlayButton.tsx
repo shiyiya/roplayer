@@ -1,6 +1,6 @@
 import React from 'react'
 import { usePlayerStore } from '../../atoms/player'
-import { Toggle } from './Toggle'
+import { Toggle } from '../ui/Toggle'
 
 export const PlayButton = ({ children }: any) => {
   const { isPlaying, togglePlay } = usePlayerStore()

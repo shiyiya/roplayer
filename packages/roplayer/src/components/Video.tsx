@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useMemo, useRef } from 'react'
+import React, { ReactNode, useEffect, useMemo, useRef } from 'react'
 import { usePlayerStore } from '../atoms/player'
 
 interface VideoProps {
@@ -35,7 +35,7 @@ interface VideoProps {
   children?: ReactNode
 }
 
-export function Video(props: VideoProps) {
+export function Video(props: React.VideoHTMLAttributes<HTMLVideoElement>) {
   const { addVideoEventListener } = usePlayerStore()
   const videoEl = useRef<HTMLVideoElement>(null)
 
@@ -44,6 +44,7 @@ export function Video(props: VideoProps) {
       addVideoEventListener(videoEl.current)
     }
   }, [])
+
 
   if (!props.src) {
     return null

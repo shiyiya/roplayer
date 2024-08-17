@@ -1,4 +1,6 @@
-export function Button(props: any) {
+import React from 'react'
+
+export function Button(props: React.ButtonHTMLAttributes<HTMLButtonElement>) {
   const { children, ...rest } = props
   return (
     <button

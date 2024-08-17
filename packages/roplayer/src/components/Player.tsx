@@ -9,6 +9,7 @@ import { Controller } from './BottomController'
 import { PlayButton } from './buttons/PlayButton'
 import { Poster } from './Poster'
 import { TimeSlider } from './TimeSlider'
+import { Chromecast } from './buttons/Chromecast'
 
 interface PlayerProps {
   children?: React.ReactNode
@@ -28,6 +29,7 @@ export function Player(props: PlayerProps) {
   return (
     <div className="relative overflow-hidden w-full h-full select-none bg-black" ref={divEl}>
       <Video
+        playsInline
         src={
           `https://sf16-sg.larksuitecdn.com/obj/tos-alisg-v-0051c001-sg/ooJsZoBhUNY7A01quEvAqhqaUoHWEA3iziZ1b`
           //'https://media.w3.org/2010/05/sintel/trailer.mp4'
@@ -47,6 +49,7 @@ export function Player(props: PlayerProps) {
           </div>
           <div className="flex items-center space-x-3">
             <Fullscreen />
+            <Chromecast />
           </div>
         </div>
       </Controller>

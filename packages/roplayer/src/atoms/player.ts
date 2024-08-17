@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { exitFullscreen, requestFullscreenIfSupport } from '../helper/fullscreen'
 import { useProgressStore } from './progress'
+import { Source } from '../types/source'
 
 type PlayerStore = {
   $player: HTMLDivElement
@@ -9,12 +10,16 @@ type PlayerStore = {
   // MediaState
   isPlaying: boolean
   isPaused: boolean
-  isLoading: boolean // buffering or not
-  hasPlayedOnce: boolean // has the video played at all?
-  volume: number
-  playbackRate: number
-  showControls: boolean
+  isLoading: boolean
   isFullScreen: boolean
+  volume: number
+  muted?: boolean
+  playbackRate: number
+
+  // PlayerState
+  showControls: boolean
+  hasPlayedOnce: boolean
+  source: Source
 
   addPlayerEventListener: (element: HTMLDivElement) => void
   addVideoEventListener: (videoElement: HTMLVideoElement) => void
@@ -41,6 +46,10 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
   volume: 1,
   playbackRate: 1,
   isFullScreen: false,
+  source: {
+    type: 'hls',
+    url: 'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+  },
   toggleFullScreen: () => {
     if (get().isFullScreen) {
       exitFullscreen()
@@ -153,7 +162,8 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
       isPlaying: false,
     }))
   },
-  seek(time: number) {
+  seek(val: number) {
+    const time = Math.min(useProgressStore.getState().progress.duration, Math.max(0, val))
     get().$video.currentTime = time
     useProgressStore.setState((state) => {
       state.progress.draggingTime = -1
@@ -161,7 +171,17 @@ export const usePlayerStore = create<PlayerStore>()((set, get) => ({
       return state
     })
   },
-  mute: () => {},
-  unmute: () => {},
-  setVolume: (val: number) => {},
+  mute: () => {
+    get().$video.muted = true
+    set((s) => ({ muted: true }))
+  },
+  unmute: () => {
+    get().$video.muted = false
+    set((s) => ({ muted: false }))
+  },
+  setVolume: (val: number) => {
+    const volume = Math.min(1, Math.max(0, val))
+    get().$video.volume = volume
+    set((s) => ({ volume: volume }))
+  },
 }))

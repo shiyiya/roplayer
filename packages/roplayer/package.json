@@ -12,7 +12,8 @@
     "@types/react": "^18.3.3",
     "@radix-ui/themes": "latest",
     "classnames": "latest",
-    "immer": "latest"
+    "immer": "latest",
+    "@types/chromecast-caf-sender": "latest"
   },
   "keywords": [],
   "author": "",

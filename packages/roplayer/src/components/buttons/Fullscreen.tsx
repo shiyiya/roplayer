@@ -1,5 +1,5 @@
 import { usePlayerStore } from '../../atoms/player'
-import { Toggle } from './Toggle'
+import { Toggle } from '../ui/Toggle'
 
 export const Fullscreen = ({ children }: any) => {
   const { isFullScreen, toggleFullScreen } = usePlayerStore()

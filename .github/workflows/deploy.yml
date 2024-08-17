@@ -20,7 +20,7 @@ jobs:
       - name: build
         run: |
           npm i pnpm -g
-          pnpm i --registry https://registry.npmmirror.com
+          pnpm i --registry https://registry.npmjs.org
           cd examples/main
           pnpm run build
           cp -r ./dist ../../
