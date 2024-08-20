@@ -7,12 +7,8 @@ export const Chromecast = () => {
   if (!isAvailable) return null
 
   return (
-    <Button
-      onClick={({ currentTarget }) => {
-        const castButton = currentTarget.querySelector<HTMLDivElement>('google-cast-launcher')
-        if (castButton) castButton.click()
-      }}
-    >
+    <Button>
+      {/* @ts-ignore */}
       <google-cast-launcher />
     </Button>
   )
